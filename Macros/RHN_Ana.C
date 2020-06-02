@@ -1,5 +1,6 @@
 /*  Simple macro showing how to access branches from the delphes output root file, loop over events, 
- * and plot simple quantities such as the jet pt and the di-electron invariant mass.
+ * and plot simple quantities such as the  and the di-electron invariant mass.
+ * Modified by Joaquin Siado to use the SM_RHL model
 
 root -l examples/RHN_Ana.C'("delphes_output.root")'*/
 
@@ -45,67 +46,123 @@ void RHN_Ana(const char *inputFile)
 	//variables
 // 	Muon *muon1, *muon2, *muon3;
 // 	MissingET *neu1, *neu2;
-// 	int count = 0;
-// 	int count2 = 0;
-	int numZ=0;
+	int count1W = 0;
+	int count2W = 0;
+	int countNR = 0;
+// 	int numZ=0;
 	for(Int_t entry = 0; entry < numberOfEntries; ++entry)
 	{
 		treeReader->ReadEntry(entry);
-// 		if (entry>10) break;
+		if (entry>10) break;
+		
 		for(Int_t i=0; i < branchParticle->GetEntriesFast(); i++)
 		{
 			GenParticle *gen = (GenParticle*) branchParticle->At(i);
 			GenParticle *genm = (GenParticle*) branchParticle->At(gen->M1);
-// 			
+			
+// 			cout<<gen->PID<<" "<<genm->PID<<" "<<endl;
+// 			cout<<gen->PID<<endl;
+// 			cout<<" p "<<gen->PID<<" m "<<genm->PID<<endl;
+// 	
+			/*if (abs(gen->PID) == 24 && abs(genm->PID) == 66)
+			{
+				count2W++;
+				cout<<"bla"<<endl;
+			}*/
+			
+			/*if (abs(gen->PID) == 24 )
+			{
+				count2W++;
+				cout<<genm->PID<<" ";
+				if (abs(genm->PID) == 24)
+				{
+					GenParticle *genm2 = (GenParticle*) branchParticle->At(genm->M1);
+					cout<<genm2->PID<<endl;
+					if (abs(mother2->PID) == 24)
+					{
+						GenParticle *mother3 = (GenParticle*) branchParticle->At(mother2->M1);
+						cout<<mother3->PID<<" ";
+					}
+				}
+				cout<<endl;
+			}*/
+			/*if (abs(gen->PID) == 13 && abs(genm->PID) == 24)
+			{
+				
+// 				count1W++;
+				GenParticle *daug1 = (GenParticle*) branchParticle->At(genm->D1);
+				GenParticle *daug2 = (GenParticle*) branchParticle->At(genm->D1+1);
+// 				cout<<j<<endl;
+// 				if (((abs(gen->PID)==14) && (abs(hija2->PID)==13)) ||  ((abs(gen->PID)==13) && (abs(hija1->PID)==14)))
+// 				{
+// 				cout<<" p "<<gen->PID<<" m "<<genm->PID<<" d1 "<<hija1->PID<<" d2 "<<hija2->PID<<" pt "<<hija1->PT + hija2->PT<<endl;
+				hist_Wmass2->Fill( ((daug1->P4()) + (daug2->P4())).M());
+				
+				GenParticle *gr1 = (GenParticle*) branchParticle->At(genm->M1);
+				GenParticle *gra = (GenParticle*) branchParticle->At(genm->M2);
+				cout<<"part "<<gen->PID<<" moth "<<genm->PID<<" gran  "<<gr1->PID<<" grgran "<<gra->PID<<endl;
+				if (abs(gra->PID) == 24)
+				{
+					int sw = 0;
+					while(sw == 0)
+					{
+						
+						GenParticle *grb = (GenParticle*) branchParticle->At(gra->M1);
+// 						cout<<"in the while loop "<<grb->PID<<endl;
+						if (abs(grb->PID) == 66)
+						{
+							sw = 1;
+							cout<<"part "<<gen->PID<<" moth "<<genm->PID<<" gran  "<<gra->PID<<" grgran "<<grb->PID<<endl;
+						}
+						else if(abs(grb->PID) == 24)
+						{
+							GenParticle *gra = (GenParticle*) branchParticle->At(gra->M1);
+							cout<<"part "<<gen->PID<<" moth "<<genm->PID<<" gran  "<<gra->PID<<" grgran "<<grb->PID<<endl;
+						}
+					}
+				}
+			}*/
 			if (abs(gen->PID) == 13 && abs(genm->PID) == 24)
 			{
-// 				cout<<" "<<gen->PID<<" "<<genm->PID<<" "<<gen->PT<<" "<<genm->PT<<endl;
-				
-				
-// 				count2 = count2 + 1;
-// 				for (int j=0; j<branchParticle->GetEntriesFast(); j++)
-// 				{
-					GenParticle *hija1 = (GenParticle*) branchParticle->At(genm->D1);
-					GenParticle *hija2 = (GenParticle*) branchParticle->At(genm->D1+1);
-// 					cout<<j<<endl;
-// 					if (((abs(gen->PID)==14) && (abs(hija2->PID)==13)) ||  ((abs(gen->PID)==13) && (abs(hija1->PID)==14)))
-// 					{
-// 						cout<<" p "<<gen->PID<<" m "<<genm->PID<<" d1 "<<hija1->PID<<" d2 "<<hija2->PID<<" pt "<<hija1->PT + hija2->PT<<endl;
-					hist_Wmass2->Fill( ((hija1->P4()) + (hija2->P4())).M());
+				GenParticle *gr1 = (GenParticle*) branchParticle->At(genm->M1);
+				cout<<"  "<<gen->PID<<"  "<<genm->PID<<"  "<<gr1->PID<<"  ";
+				if (abs(gr1->PID) == 24)
+				{
+					GenParticle *gr2 = (GenParticle*) branchParticle->At(gr1->M1);
+					cout<<gr2->PID<<"  ";
+					if (abs(gr2->PID) == 24)
+					{
+						GenParticle *gr3 = (GenParticle*) branchParticle->At(gr2->M1);
+						cout<<gr3->PID<<"  ";
+						if (abs(gr3->PID) == 24)
+						{
+							GenParticle *gr4 = (GenParticle*) branchParticle->At(gr3->M1);
+							cout<<gr4->PID<<"  "<<endl;
+						}
+					}
+				}
 			}
-// 			if (abs(gen->PID) == 13 && abs(genm->PID) == 23)
+			
+// 			cout<<"  "<<gen->PID<<"  "<<genm->PID<<"  ";
+// 			if (abs(gen->PID) == 13 && abs(genm->PID) == 24)
 // 			{
-// 				numZ++;
-// 			}
-// 				if ((abs(genm->D1) == 13 && abs(genm->D2) == 14) || (abs(genm->D1) == 14 && abs(genm->D2) == 13))
+// 				GenParticle *gr1 = (GenParticle*) branchParticle->At(genm->M1);
+// 				cout<<gr1->PID<<"  ";
+// 				if (abs(gr1->PID) == 24)
 // 				{
-// 					count = count + 1;
-// 					cout<<i<<"one more"<<endl;
-// 					hist_Wmass2->Fill( ((neu1->P4()) + (muon2->P4())).M());
-// 				}
-			}
-		}
-// 		cout<<count<<" "<<count2<<endl;
-// 	}
-// 						if(abs(genm->PID) == 13)
-// 						{
-// 							genm->D1
-// 							GenParticle *genm2 = (GenParticle*) branchParticle->At(gen->M1);
-// 						}
-						
-// 						cout<<i<<endl;
-// 						cout<<i<<" pid "<<gen->PID<<" pidm "<<genm->PID<<endl;
-// 						hist_Wmass2->Fill( ((neu1->P4()) + (muon3->P4())).M());
-// 					}
-// 					if(abs(gen->PID) == 13 && abs(genm->PID) == 13)
+// 					GenParticle *gr2 = (GenParticle*) branchParticle->At(gr1->M1);
+// 					cout<<gr2<<" ";
+// 					if (abs(gr1->PID) == 24)
 // 					{
-						
+// 						GenParticle *gr3 = (GenParticle*) branchParticle->At(gr2->M1);
+// 						cout<<gr3<<" ";
 // 					}
 // 				}
-// 				cout<<i<<endl;
-// 			}
-// 		}
-// 	}
+// 			}	
+		}//loop of particles
+		cout<<"new event"<<endl;
+	}//loo of events
+// 	cout<<count2W<<endl;
 
 	
 	
