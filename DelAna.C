@@ -3,6 +3,7 @@
 #include <TH2.h>
 #include <TStyle.h>
 #include <TCanvas.h>
+//to read
 
 void DelAna::Begin()
 {
@@ -66,7 +67,11 @@ void DelAna::Loop()
     //Gives you the status of the event analysis
     if (nEvtTotal%1000==0)
       cout<<nEvtTotal<<" Events processed so far"<<endl;
+<<<<<<< HEAD
    
+=======
+    
+>>>>>>> 46b1ab86e9a494d344b57dce63a565de1331404c
     // START MY CODE        
     //cout<<"I am running "<<endl;    
     //particles.clear();

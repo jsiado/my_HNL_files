@@ -39,7 +39,11 @@ R__LOAD_LIBRARY(libDelphes)
 using namespace std;
 
 struct ob {
+<<<<<<< HEAD
  TLorentzVector v;
+=======
+  TLorentzVector v;
+>>>>>>> 46b1ab86e9a494d344b57dce63a565de1331404c
   int pid;
   int status;
   int index;
@@ -84,7 +88,11 @@ public :
    Float_t         Event_ReadTime[kMaxEvent];   //[Event_]
    Float_t         Event_ProcTime[kMaxEvent];   //[Event_]
    Int_t           Event_ProcessID[kMaxEvent];   //[Event_]
+<<<<<<< HEAD
 Int_t           Event_MPI[kMaxEvent];   //[Event_]
+=======
+   Int_t           Event_MPI[kMaxEvent];   //[Event_]
+>>>>>>> 46b1ab86e9a494d344b57dce63a565de1331404c
    Float_t         Event_Weight[kMaxEvent];   //[Event_]
    Float_t         Event_Scale[kMaxEvent];   //[Event_]
    Float_t         Event_AlphaQED[kMaxEvent];   //[Event_]
@@ -133,7 +141,11 @@ Int_t           Event_MPI[kMaxEvent];   //[Event_]
    Float_t         Particle_Pz[kMaxParticle];   //[Particle_]
    Float_t         Particle_P[kMaxParticle];   //[Particle_]
    Float_t         Particle_PT[kMaxParticle];   //[Particle_]
+<<<<<<< HEAD
 Float_t         Particle_Eta[kMaxParticle];   //[Particle_]
+=======
+   Float_t         Particle_Eta[kMaxParticle];   //[Particle_]
+>>>>>>> 46b1ab86e9a494d344b57dce63a565de1331404c
    Float_t         Particle_Phi[kMaxParticle];   //[Particle_]
    Float_t         Particle_Rapidity[kMaxParticle];   //[Particle_]
    Float_t         Particle_CtgTheta[kMaxParticle];   //[Particle_]
