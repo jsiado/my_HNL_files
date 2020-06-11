@@ -19,10 +19,15 @@ R__LOAD_LIBRARY(libDelphes)
 
 struct MyPlots
 {
-  TH1 *fJetPT[2];
+  TH1 *fJetPT1;
+  TH1 *fJetPT2;
   TH1 *fMissingET;
   TH1 *fElectronPT;
-  TH1 *fMuonPT[3];
+  TH1 *fMuonPT1;
+  TH1 *fMuonPT2;
+  TH1 *fMuonPT3;
+  TH1 *fNRMass;
+  TH1 *fWMass;
 };
 
 //------------------------------------------------------------------------------
@@ -39,44 +44,47 @@ void BookHistograms(ExRootResult *result, MyPlots *plots)
 	TPaveText *comment;
 
 	// book 2 histograms for PT of 1st and 2nd leading jets
-	plots->fJetPT[0] = result->AddHist1D("jet_pt_0", "leading jet P_{T}",  "jet P_{T} GeV/c", "number of jets", 50, 0.0, 100.0);
-	plots->fJetPT[1] = result->AddHist1D("jet_pt_1", "2nd leading jet P_{T}", "jet P_{T} GeV/c", "number of jets", 50, 0.0, 100.0);
+	plots->fJetPT1 = result->AddHist1D("Jet_pt_0", "Leading jet P_{T}",  "Jet P_{T} GeV/c", "Number of jets", 50, 0.0, 100.0);
+	plots->fJetPT2 = result->AddHist1D("Jet_pt_1", "2nd leading jet P_{T}", "Jet P_{T} GeV/c", "Number of jets", 50, 0.0, 100.0);
 
-	plots->fJetPT[0]->SetLineColor(kRed);
-	plots->fJetPT[1]->SetLineColor(kBlue);
+	plots->fJetPT1->SetLineColor(kRed);
+	plots->fJetPT2->SetLineColor(kBlue);
 
-	stack = result->AddHistStack("jet_pt_all", "1st and 2nd jets P_{T}");
-	stack->Add(plots->fJetPT[0]);
-	stack->Add(plots->fJetPT[1]);
+	stack = result->AddHistStack("Jet_pt_all", "1st and 2nd jets P_{T}");
+	stack->Add(plots->fJetPT1);
+	stack->Add(plots->fJetPT2);
 
 	legend = result->AddLegend(0.72, 0.86, 0.98, 0.98);
-	legend->AddEntry(plots->fJetPT[0], "leading jet", "l");
-	legend->AddEntry(plots->fJetPT[1], "second jet", "l");
+	legend->AddEntry(plots->fJetPT1, "Leading jet", "l");
+	legend->AddEntry(plots->fJetPT2, "Second jet", "l");
 	result->Attach(stack, legend);
 
 	// book 2 histograms for PT of muons
-	plots->fMuonPT[0] = result->AddHist1D("muon_pt_0", "leading muon P_{T}",  "muon P_{T} GeV/c", "number of muons", 50, 0.0, 140.0);
-	plots->fMuonPT[1] = result->AddHist1D("muon_pt_1", "2nd leading muon P_{T}",  "muon P_{T} GeV/c", "number of muons", 50, 0.0, 140.0);
-	plots->fMuonPT[2] = result->AddHist1D("muon_pt_2", "third leading muon P_{T}",  "muon P_{T} GeV/c", "number of muons", 50, 0.0, 140.0);
+	plots->fMuonPT1 = result->AddHist1D("Muon_pt_0", "Leading muon P_{T}",  "Muon P_{T} GeV/c", "Number of muons", 50, 0.0, 140.0);
+	plots->fMuonPT2 = result->AddHist1D("Muon_pt_1", "2nd leading muon P_{T}",  "Muon P_{T} GeV/c", "Number of muons", 50, 0.0, 140.0);
+	plots->fMuonPT3 = result->AddHist1D("Muon_pt_2", "3rd leading muon P_{T}",  "Muon P_{T} GeV/c", "Number of muons", 50, 0.0, 140.0);
 	
-	plots->fMuonPT[0]->SetLineColor(kRed);
-	plots->fMuonPT[1]->SetLineColor(kBlue);
-	plots->fMuonPT[2]->SetLineColor(kYellow);
+	plots->fMuonPT1->SetLineColor(kRed);
+	plots->fMuonPT2->SetLineColor(kBlue);
+	plots->fMuonPT3->SetLineColor(kYellow);
 	
 	stack = result->AddHistStack("Muon_pt_all", "Muon P_{T} Dist");
-	stack->Add(plots->fMuonPT[0]);
-	stack->Add(plots->fMuonPT[1]);
-	stack->Add(plots->fMuonPT[2]);
+	stack->Add(plots->fMuonPT1);
+	stack->Add(plots->fMuonPT2);
+	stack->Add(plots->fMuonPT3);
 	
 	legend = result->AddLegend(0.72, 0.86, 0.98, 0.98);
-	legend->AddEntry(plots->fMuonPT[0], "leading muon", "l");
-	legend->AddEntry(plots->fMuonPT[1], "second muon", "l");
-	legend->AddEntry(plots->fMuonPT[2], "Third muon", "l");
+	legend->AddEntry(plots->fMuonPT1, "Leading muon", "l");
+	legend->AddEntry(plots->fMuonPT2, "Second muon", "l");
+	legend->AddEntry(plots->fMuonPT3, "Third muon", "l");
 	result->Attach(stack, legend);
 	
 	// book more histograms
-	plots->fElectronPT = result->AddHist1D("electron_pt", "electron P_{T}", "electron P_{T} GeV/c", "number of electrons", 50, 0.0, 100.0);
-	plots->fMissingET = result->AddHist1D("missing_et", "Missing E_{T}", "Missing E_{T} GeV", "number of events", 60, 0.0, 140.0);
+	plots->fElectronPT = result->AddHist1D("Electron_pt", "Electron P_{T}", "Electron P_{T} GeV/c", "Number of electrons", 50, 0.0, 100.0);
+	plots->fMissingET = result->AddHist1D("Missing_et", "Missing E_{T}", "Missing E_{T} GeV", "Number of events", 60, 0.0, 140.0);
+	plots->fNRMass = result->AddHist1D("NR Mass ", "NR Mass GeV", "NR Mass (GeV)", "number of events", 60, 0.0, 80.0);
+	plots->fWMass = result->AddHist1D("W Mass ", "W Mass", "W Mass (GeV)", "number of events", 60, 0.0, 140.0);
+
 
   // book general comment
 //   comment = result->AddComment(0.64, 0.86, 0.98, 0.98);
@@ -91,7 +99,11 @@ void BookHistograms(ExRootResult *result, MyPlots *plots)
 
   // show histogram statisics for MissingET
   plots->fMissingET->SetStats();
+  plots->fNRMass->SetStats();
+  plots->fWMass->SetStats();
 }
+
+
 
 //------------------------------------------------------------------------------
 
@@ -101,15 +113,21 @@ void AnalyseEvents(ExRootTreeReader *treeReader, MyPlots *plots)
 	TClonesArray *branchElectron = treeReader->UseBranch("Electron");
 	TClonesArray *branchMissingET = treeReader->UseBranch("MissingET");
 	TClonesArray *branchMuon = treeReader->UseBranch("Muon");
+	TClonesArray *branchParticle = treeReader->UseBranch("Particle");
 	
 	Long64_t allEntries = treeReader->GetEntries();
 	
 	cout << "** Chain contains " << allEntries << " events" << endl;
 	
-	Jet *jet[2];
+	Jet *jet1;
+	Jet *jet2;
 	MissingET *met;
 	Electron *electron;
-	Muon *muon[3];
+	Muon *muon1;
+	Muon *muon2;
+	Muon *muon3;
+	
+	
 	
 	Long64_t entry;
 	
@@ -124,27 +142,41 @@ void AnalyseEvents(ExRootTreeReader *treeReader, MyPlots *plots)
     // Analyse two leading jets
 		if(branchJet->GetEntriesFast() >= 2)
 		{
-			jet[0] = (Jet*) branchJet->At(0);
-			jet[1] = (Jet*) branchJet->At(1);
+			jet1 = (Jet*) branchJet->At(0);
+			jet2 = (Jet*) branchJet->At(1);
 
-			plots->fJetPT[0]->Fill(jet[0]->PT);
-			plots->fJetPT[1]->Fill(jet[1]->PT);
+			plots->fJetPT1->Fill(jet1->PT);
+			plots->fJetPT2->Fill(jet2->PT);
 		}
     
 		if(branchMuon->GetEntriesFast() >= 1)
 		{
-			muon[0] = (Muon*) branchMuon->At(0);
-			plots->fMuonPT[0]->Fill(muon[0]->PT);
+			muon1 = (Muon*) branchMuon->At(0);
+			plots->fMuonPT1->Fill(muon1->PT);
+			
 			if(branchMuon->GetEntriesFast() >= 2)
 			{
-				muon[1] = (Muon*) branchMuon->At(1);
-				plots->fMuonPT[1]->Fill(muon[1]->PT);
+				muon2 = (Muon*) branchMuon->At(1);
+				plots->fMuonPT2->Fill(muon2->PT);
+				
 				if(branchMuon->GetEntriesFast() >= 3)
 				{
-					muon[2] = (Muon*) branchMuon->At(2);
-					plots->fMuonPT[2]->Fill(muon[2]->PT);
+					muon3 = (Muon*) branchMuon->At(2);
+					plots->fMuonPT3->Fill(muon3->PT);
 				}
 			}
+		}
+		
+		if(branchMuon->GetEntriesFast() >= 3 && branchMissingET->GetEntriesFast() > 0)
+		{
+			muon1 = (Muon*) branchMuon->At(0);
+			muon2 = (Muon*) branchMuon->At(1);
+			muon3 = (Muon*) branchMuon->At(2);
+			met = (MissingET*) branchMissingET->At(0);
+			
+// 			plots->fNRMass->Fill(((muon2->P4()) + (muon3->P4()) + (met->P4())).M());
+			plots->fNRMass->Fill( sqrt( muon3->PT*muon3->PT + met->MET*met->MET + muon2->PT*muon2->PT));
+// 			plots->fWMass->Fill( ( (muon1->P4()) + (muon2->P4()) + (muon3->P4()) + (met->P4()) ).M());
 		}
 
     // Analyse missing ET
@@ -157,16 +189,8 @@ void AnalyseEvents(ExRootTreeReader *treeReader, MyPlots *plots)
 		if(branchElectron->GetEntriesFast() > 0)
 		{
 			elec = (Electron*) branchElectron->At(0);
-			plots->fElectron->Fill(elec->MET);
+			plots->fElectron->Fill(electron->PT);
 		}
-
-
-    // Loop over all electrons in event
-//     for(i = 0; i < branchElectron->GetEntriesFast(); ++i)
-//     {
-//       electron = (Electron*) branchElectron->At(i);
-//       plots->fElectronPT->Fill(electron->PT);
-//     }
 	}
 }
 

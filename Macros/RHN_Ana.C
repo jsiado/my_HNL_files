@@ -43,6 +43,15 @@ void RHN_Ana(const char *inputFile)
 	TH1 *hist_Zmass = new TH1F("Z mass ", "Z mass", 100, 0.0, 140.0);
 	TH1 *hist_NRmass = new TH1F("NR mass ","NR mass ", 100, 0.0, 140.0);
 	
+	TH1 *hist_WM1 = new TH1F("W1 mass ", "W1 mass", 100, 0.0, 140.0);
+	TH1 *hist_WM2 = new TH1F("W2 mass ", "W2 mass", 100, 0.0, 140.0);
+	TH1 *hist_WM3 = new TH1F("W3 mass ", "W3 mass", 100, 0.0, 140.0);
+	
+	TH1 *hist_muon12 = new TH1F("12 NR mass ","NR mass ", 100, 0.0, 140.0);
+	TH1 *hist_muon13 = new TH1F("13 NR mass ","NR mass ", 100, 0.0, 140.0);
+	TH1 *hist_muon23 = new TH1F("23 NR mass ","NR mass ", 100, 0.0, 140.0);
+	TH1 *hist_all = new TH1F("all ","NR mass ", 100, 0.0, 140.0);
+	
 	//variables
 // 	Muon *muon1, *muon2, *muon3;
 // 	MissingET *neu1, *neu2;
@@ -53,12 +62,12 @@ void RHN_Ana(const char *inputFile)
 	for(Int_t entry = 0; entry < numberOfEntries; ++entry)
 	{
 		treeReader->ReadEntry(entry);
-		if (entry>10) break;
+// 		if (entry>2000) break;
 		
 		for(Int_t i=0; i < branchParticle->GetEntriesFast(); i++)
 		{
 			GenParticle *gen = (GenParticle*) branchParticle->At(i);
-			GenParticle *genm = (GenParticle*) branchParticle->At(gen->M1);
+// 			GenParticle *genm = (GenParticle*) branchParticle->At(gen->M1);
 			
 // 			cout<<gen->PID<<" "<<genm->PID<<" "<<endl;
 // 			cout<<gen->PID<<endl;
@@ -122,7 +131,7 @@ void RHN_Ana(const char *inputFile)
 					}
 				}
 			}*/
-			if (abs(gen->PID) == 13 && abs(genm->PID) == 24)
+			/*if (abs(gen->PID) == 13 && abs(genm->PID) == 24)
 			{
 				GenParticle *gr1 = (GenParticle*) branchParticle->At(genm->M1);
 				cout<<"  "<<gen->PID<<"  "<<genm->PID<<"  "<<gr1->PID<<"  ";
@@ -141,8 +150,27 @@ void RHN_Ana(const char *inputFile)
 						}
 					}
 				}
+			}*/
+			if(branchMuon->GetEntriesFast() >= 3 && branchMissingET->GetEntriesFast() > 0)
+			{
+				muon1 = (Muon*) branchMuon->At(0);
+				muon2 = (Muon*) branchMuon->At(1);
+				muon3 = (Muon*) branchMuon->At(2);
+				met = (MissingET*) branchMissingET->At(0);
+				
+// 				hist_muon12->Fill(((muon1->P4()) + (muon2->P4())).M());
+				hist_muon23->Fill(( (muon2->P4()) + (met->P4()) + (muon3->P4())   ).M());
+				hist_WM1->Fill(( (muon1->P4()) + (met->P4())  ).M());
+				hist_WM2->Fill(( (muon2->P4()) + (met->P4())  ).M());
+				hist_WM3->Fill(( (muon3->P4()) + (met->P4())  ).M());
+				
+				hist_all->Fill(muon1->PT + muon2->PT+ muon3->PT + met->MET  );
+				
+				
+// 				hist_Wmass->Fill(( (muon1->P4()) + (met->P4())  ).M());
 			}
 			
+// 				muon[0] = (Muon*) branchMuon->At(0);
 // 			cout<<"  "<<gen->PID<<"  "<<genm->PID<<"  ";
 // 			if (abs(gen->PID) == 13 && abs(genm->PID) == 24)
 // 			{
@@ -160,10 +188,19 @@ void RHN_Ana(const char *inputFile)
 // 				}
 // 			}	
 		}//loop of particles
-		cout<<"new event"<<endl;
+// 		cout<<"new event"<<endl;
 	}//loo of events
 // 	cout<<count2W<<endl;
+	TCanvas * canvas1 = new TCanvas("canvas1");
+	TCanvas * canvas2 = new TCanvas("canvas2");	
+	TCanvas * canvas3 = new TCanvas("canvas3");
+	TCanvas * canvas4 = new TCanvas("canvas4");
+	
 
+	canvas1->cd(); hist_WM1->Draw();
+	canvas2->cd(); hist_WM2->Draw();
+	canvas3->cd(); hist_WM3->Draw();
+	canvas4->cd(); hist_all->Draw();
 	
 	
 	TFile *file1 = new TFile("out_hist_RHN.root", "RECREATE");
