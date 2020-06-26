@@ -119,6 +119,7 @@ void AnalyseEvents(ExRootTreeReader *treeReader, MyPlots *plots)
 	
 	cout << "** Chain contains " << allEntries << " events" << endl;
 	
+	
 	Jet *jet1;
 	Jet *jet2;
 	MissingET *met;
@@ -136,6 +137,8 @@ void AnalyseEvents(ExRootTreeReader *treeReader, MyPlots *plots)
 	// Loop over all events
 	for(entry = 0; entry < allEntries; ++entry)
 	{
+		if (entry%1000==0){	cout<<entry<<" Events processed so far"<<endl;}
+    
     // Load selected branches with data from specified event
 		treeReader->ReadEntry(entry);
 
@@ -148,7 +151,8 @@ void AnalyseEvents(ExRootTreeReader *treeReader, MyPlots *plots)
 			plots->fJetPT1->Fill(jet1->PT);
 			plots->fJetPT2->Fill(jet2->PT);
 		}
-    
+		
+		//Analyse three leading muons
 		if(branchMuon->GetEntriesFast() >= 1)
 		{
 			muon1 = (Muon*) branchMuon->At(0);
@@ -192,7 +196,31 @@ void AnalyseEvents(ExRootTreeReader *treeReader, MyPlots *plots)
 			plots->fElectron->Fill(electron->PT);
 		}
 	}
+	for(Int_t i=0; i < branchParticle->GetEntriesFast(); i++)
+	{
+		GenParticle *gen = (GenParticle*) branchParticle->At(i);
+		m = findMother(i)
+	}
 }
+
+void findMother(int part)
+{
+//    ob mo;
+   mo = part;
+   GenParticle *mother = (GenParticle*) branchParticle->At(gen->M1);
+   
+   if(mother->PID == -1) return part;
+   if(pa[j.M1].pid!=j.pid){
+     mo = pa[j.M1];
+     return mo;
+   }
+   if(pa[j.M1].pid==j.pid){
+     mo =GetMother(pa[j.M1], pa);
+     
+   }
+   
+   return mo;
+ }
 
 //------------------------------------------------------------------------------
 
@@ -200,6 +228,8 @@ void PrintHistograms(ExRootResult *result, MyPlots *plots)
 {
   result->Print("png");
 }
+
+
 
 //------------------------------------------------------------------------------
 

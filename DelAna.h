@@ -39,16 +39,17 @@ R__LOAD_LIBRARY(libDelphes)
 using namespace std;
 
 struct ob {
-<<<<<<< HEAD
- TLorentzVector v;
-=======
-  TLorentzVector v;
->>>>>>> 46b1ab86e9a494d344b57dce63a565de1331404c
-  int pid;
-  int status;
-  int index;
-  int M1;
-  int M2;
+	TLorentzVector v;
+	int pid;
+	int status;
+	int index;
+	int M1;
+	int M2;
+	float Eta;
+	float Pt;
+	float MET;
+	float Phi;
+//   float P4;
   //int D1;
   //int D2;
     
@@ -88,11 +89,7 @@ public :
    Float_t         Event_ReadTime[kMaxEvent];   //[Event_]
    Float_t         Event_ProcTime[kMaxEvent];   //[Event_]
    Int_t           Event_ProcessID[kMaxEvent];   //[Event_]
-<<<<<<< HEAD
-Int_t           Event_MPI[kMaxEvent];   //[Event_]
-=======
    Int_t           Event_MPI[kMaxEvent];   //[Event_]
->>>>>>> 46b1ab86e9a494d344b57dce63a565de1331404c
    Float_t         Event_Weight[kMaxEvent];   //[Event_]
    Float_t         Event_Scale[kMaxEvent];   //[Event_]
    Float_t         Event_AlphaQED[kMaxEvent];   //[Event_]
@@ -141,11 +138,7 @@ Int_t           Event_MPI[kMaxEvent];   //[Event_]
    Float_t         Particle_Pz[kMaxParticle];   //[Particle_]
    Float_t         Particle_P[kMaxParticle];   //[Particle_]
    Float_t         Particle_PT[kMaxParticle];   //[Particle_]
-<<<<<<< HEAD
-Float_t         Particle_Eta[kMaxParticle];   //[Particle_]
-=======
    Float_t         Particle_Eta[kMaxParticle];   //[Particle_]
->>>>>>> 46b1ab86e9a494d344b57dce63a565de1331404c
    Float_t         Particle_Phi[kMaxParticle];   //[Particle_]
    Float_t         Particle_Rapidity[kMaxParticle];   //[Particle_]
    Float_t         Particle_CtgTheta[kMaxParticle];   //[Particle_]
@@ -786,7 +779,29 @@ Float_t         Particle_Eta[kMaxParticle];   //[Particle_]
   void SetVerbose(int verbose){ _verbosity = verbose; }
  public:
   struct Hists {
+    TH1F *Bla;
     TH1F *NMass;
+    TH1F *WMass;
+	
+	TH1F *LeaMPt;
+	TH1F *LeaMEta;
+	TH1F *LeaMPhi;
+
+	TH1F *Mu1Pt;
+    TH1F *Mu1Eta;
+    TH1F *Mu1Phi;
+	
+	TH1F *Mu2Pt;
+	TH1F *Mu2Eta;
+	TH1F *Mu2Phi;
+	
+	TH1F *NuMet;
+	TH1F *NuEta;
+	TH1F *NuPhi;
+	
+// 	TH1F *NuPT;
+// 	TH1F *NuPT;
+	
     //TH1F *leppt[2];
     
   };
