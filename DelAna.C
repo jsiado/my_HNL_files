@@ -86,6 +86,8 @@ void DelAna::Loop()
 			temp.index = i;
 			temp.M1 = Particle_M1[i];
 			temp.M2 = Particle_M2[i];
+			temp.TrImPa = Particle_D0[i];
+			temp.LoImPa = Particle_DZ[i];
 // 			temp.D1 = Particle_D1[i];
 // 			temp.D2 = Particle_D2[i];
 // 			particles.push_back(temp);
@@ -108,6 +110,13 @@ void DelAna::Loop()
 				}
 			}
 		}
+		cout<<NW[0].TrImPa<<" "<<NW[1].TrImPa<<" "<<NW[2].TrImPa<<endl;
+		h.TrackD1->Fill(NW[1].verT);
+		h.TrackD2->Fill(NW[0].Particle_D0);
+		h.TrackD3->Fill(NW[2].Particle_D0);
+		
+// 		h.TrackR->Fill( sqrt (  (Track.X)*(Track.X) + (NW[0].v.Track->Y)*(NW[0].v.Track->Y) + (NW[0].v.Track->Z)*(NW[0].v.Track->Z) ) );
+		
 		h.Mu1Pt->Fill(NW[1].v.Pt());
 		h.Mu1Eta->Fill(NW[1].v.Eta());
 		h.Mu1Phi->Fill(NW[1].v.Phi());
@@ -136,7 +145,7 @@ void DelAna::Loop()
 
 		
 // 		Reco W Mass
-		/*vector<ob> NW2;
+		vector<ob> NW2;
 		NW2.clear();
 		for(int i =0;i<Particle_;i++)
 		{
@@ -155,7 +164,7 @@ void DelAna::Loop()
 // 			cout<<"size "<<NW2.size()<<" d1 "<<NW2[0].pid<<endl;
 // 		}
 // 		cout<<"d1 "<<NW2[0].pid<<endl" d2 "<<NW[1].pid<<" d3 "<<NW[2].pid<<endl
-		if (NW2.size()>0) h.WMass->Fill( (NW[0].v+NW[1].v+NW[2].v + NW2[0].v).M());*/
+		if (NW2.size()>0) h.WMass->Fill( (NW[0].v+NW[1].v+NW[2].v + NW2[0].v).M());
 	}
 }
 
@@ -187,10 +196,10 @@ void DelAna::BookHistograms()
 	h.LeaMPhi->GetYaxis()->SetTitle("# of Muons");
 	h.LeaMPhi->SetTitle("Leading Muon Phi");
 	
-	h.Mu1Pt  = new TH1F("Muon 1 P_{T}","Muon 1 P_{T}",100.0,0.0,100); //h.NMass->Sumw2();
+	h.Mu1Pt  = new TH1F("Muon_1 P_{T}","Muon_1 P_{T}",100.0,0.0,100); //h.NMass->Sumw2();
 	h.Mu1Pt->GetXaxis()->SetTitle("P_{T} [GeV]");
 	h.Mu1Pt->GetYaxis()->SetTitle("# of Muons");
-	h.Mu1Pt->SetTitle("Muon 1 P_{T}");
+	h.Mu1Pt->SetTitle("Muon_1 P_{T}");
 	
     h.Mu1Eta  = new TH1F("Muon 1 eta","Muon 1 eta", 100.0,-10.0,10.0); //h.WMass->Sumw2();
 	h.Mu1Eta->GetXaxis()->SetTitle("Eta");
@@ -231,6 +240,21 @@ void DelAna::BookHistograms()
 	h.NuPhi->GetXaxis()->SetTitle("Phi");
 	h.NuPhi->GetYaxis()->SetTitle("# of Neutrinos");
 	h.NuPhi->SetTitle("Neutrinos Phi");
+	
+	h.TrackD1  = new TH1F("Tracks D1","Tracks D1", 100.0,-200.0,500.0); //h.WMass->Sumw2();
+	h.TrackD1->GetXaxis()->SetTitle("Distance");
+	h.TrackD1->GetYaxis()->SetTitle("# of Tracks");
+	h.TrackD1->SetTitle("Tracks D1");
+	
+	h.TrackD2  = new TH1F("Tracks D2","Track D2", 100.0,-2.,1000.0); //h.WMass->Sumw2();
+	h.TrackD2->GetXaxis()->SetTitle("Distance");
+	h.TrackD2->GetYaxis()->SetTitle("# of Tracks");
+	h.TrackD2->SetTitle("Tracks D2");
+	
+	h.TrackD3  = new TH1F("Tracks D3","Track D3", 100.0,-2.,1000.0); //h.WMass->Sumw2();
+	h.TrackD3->GetXaxis()->SetTitle("Distance");
+	h.TrackD3->GetYaxis()->SetTitle("# of Tracks");
+	h.TrackD3->SetTitle("Tracks D3");
 }
 
 ob DelAna::GetMother(ob j, ob pa[])

@@ -49,6 +49,13 @@ struct ob {
 	float Pt;
 	float MET;
 	float Phi;
+	float Track;
+	float Particle_D0;
+	float Particle;
+	float Particle_DZ;
+	float TrImPa;
+	float LoImPa;
+	float verT;
 //   float P4;
   //int D1;
   //int D2;
@@ -779,17 +786,16 @@ public :
   void SetVerbose(int verbose){ _verbosity = verbose; }
  public:
   struct Hists {
-    TH1F *Bla;
-    TH1F *NMass;
-    TH1F *WMass;
+	TH1F *NMass;
+	TH1F *WMass;
 	
 	TH1F *LeaMPt;
 	TH1F *LeaMEta;
 	TH1F *LeaMPhi;
 
 	TH1F *Mu1Pt;
-    TH1F *Mu1Eta;
-    TH1F *Mu1Phi;
+	TH1F *Mu1Eta;
+	TH1F *Mu1Phi;
 	
 	TH1F *Mu2Pt;
 	TH1F *Mu2Eta;
@@ -799,11 +805,12 @@ public :
 	TH1F *NuEta;
 	TH1F *NuPhi;
 	
-// 	TH1F *NuPT;
-// 	TH1F *NuPT;
+	TH1F *TrackD1;
+	TH1F *TrackD2;
+	TH1F *TrackD3;
+	
 	
     //TH1F *leppt[2];
-    
   };
   
  protected:
