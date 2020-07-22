@@ -11,10 +11,11 @@ void ana(int sample_id=0)
   DelAna *t = new DelAna(chain);
   
   if(sample_id==0){
-	chain->Add("RHN_Mu_13TeV_10k.root");
+    //chain->Add("RHN_Mu_13TeV_10k.root");
+    chain->Add("RHN_Mu_13TeV_10k_v2.root");
 
-    t->SetHstFileName("hst_RHN.root");
-    t->SetSumFileName("sum_RHN.txt");
+    t->SetHstFileName("hst_RHN_v2.root");
+    t->SetSumFileName("sum_RHN_v2.txt");
   }
 
   t->Begin();
