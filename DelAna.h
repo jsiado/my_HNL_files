@@ -49,6 +49,10 @@ struct ob {
   float Dz;
   //int D1;
   //int D2;
+  float Eta;
+	float Pt;
+	float MET;
+	float Phi;
     
 };
 
@@ -894,7 +898,11 @@ public :
   void SetVerbose(int verbose){ _verbosity = verbose; }
 public:
   struct Hists {
-    TH1F *NMass, *Dxy, *Dz;
+    TH1F *NMass, *WMass, *Dxy, *Dz;
+	TH1F *LeaLepPt, *LeaLepEta, *LeaLepPhi;
+	TH1F *Lep1Pt, *Lep1Eta, *Lep1Phi;
+	TH1F *Lep2Pt, *Lep2Eta, *Lep2Phi;
+	TH1F *NuMet, *NuEta, *NuPhi;
     //TH1F *leppt[2];
     
   };
@@ -922,9 +930,9 @@ DelAna::DelAna(TTree *tree) : fChain(0)
 // if parameter tree is not specified (or zero), connect the file
 // used to generate this class and read the Tree.
    if (tree == 0) {
-      TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject("../RHN_Mu_13TeV_10k_v2.root");
+      TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject("../RHN_Mu_13TeV_30GeVp.root");
       if (!f || !f->IsOpen()) {
-         f = new TFile("../RHN_Mu_13TeV_10k_v2.root");
+         f = new TFile("../RHN_Mu_13TeV_30GeVp.root");
       }
       f->GetObject("Delphes",tree);
 
