@@ -87,6 +87,8 @@ void DelAna::Loop()
 
     vector<ob> NW;
     NW.clear();
+	vector<ob> NW2;
+    NW2.clear();
     for(int i =0;i<Particle_;i++)
 	{
 		ob m = GetMother(particles[i],particles);
@@ -96,161 +98,148 @@ void DelAna::Loop()
 			if(particles[i].status==1 and m.pid==66)
 				NW.push_back(particles[i]);
 		}
+		if(abs(particles[i].pid)==13)
+		{
+			if(particles[i].status==1 and abs(m.pid)==24)
+				NW2.push_back(particles[i]);
+		}
+		
 	}
+	
+	/*for(int i =0;i<Particle_;i++)  //same result
+	{
+		ob m = GetMother(particles[i],particles);
+		//if(particles[i].pid==13)cout<<" pid "<<particles[i].pid<<" mother pid "<<m.pid<<endl;      
+		if(abs(particles[i].pid)==13)
+		{
+			if(particles[i].status==1 and m.pid==66)
+				NW.push_back(particles[i]);
+			if(particles[i].status==1 and abs(m.pid)==24)
+				NW2.push_back(particles[i]);
+		}
+		if(abs(particles[i].pid)==14)
+		{
+			if(particles[i].status==1 and m.pid==66)
+				NW.push_back(particles[i]);
+		}
+		
+	}*/
+	
+	
+	
+	
+	
 	//cout<<"dau size "<<NW.size()<<endl;
 	//cout<<"d1 "<<NW[0].v.Pt()<<" d2 "<<NW[1].pid<<" d3 "<<NW[2].pid<<endl;
-    
+//     cout<<NW2.size();
 	h.NMass->Fill((NW[0].v+NW[1].v+NW[2].v).M());
+	if (NW2.size()>0) 
+	{
+		h.WMass->Fill((NW[0].v+NW[1].v+NW[2].v+NW2[0].v).M());
+		h.L1Pt->Fill(NW[0].v.Pt());
+		h.L1Eta->Fill(NW[0].v.Eta());
+		h.L1Phi->Fill(NW[0].v.Phi());
+	}
 	h.Dxy->Fill(NW[0].Dxy);
 	h.Dz->Fill(NW[0].Dz);
 	
-	//fill eta, pt and phi for nu and two leptons
-	/*if(abs(NW[0].pid == 14))
-	{
-// 		h.NuEta->Fill(NW[0].v.Eta());
-// 		h.NuPhi->Fill(NW[0].v.Phi());
-		h.NuMet->Fill(NW[0].v.Pt());
-		if(NW[1].v.Pt() >= NW[2].v.Pt())
-		{
-			h.Lep1Pt->Fill(NW[1].v.Pt());
-			h.Lep2Pt->Fill(NW[2].v.Pt());
-		}
-		else
-		{
-			h.Lep1Pt->Fill(NW[2].v.Pt());
-			h.Lep2Pt->Fill(NW[1].v.Pt());
-		}
-		
-	}
-	if (abs(NW[1].pid == 14))
-	{
-// 		h.NuEta->Fill(NW[1].v.Eta());
-// 		h.NuPhi->Fill(NW[1].v.Phi());
-		h.NuMet->Fill(NW[1].v.Pt());
-		if(NW[0].v.Pt() >= NW[2].v.Pt())
-		{
-			h.Lep1Pt->Fill(NW[0].v.Pt());
-			h.Lep2Pt->Fill(NW[2].v.Pt());
-		}
-		else
-		{
-			h.Lep1Pt->Fill(NW[2].v.Pt());
-			h.Lep2Pt->Fill(NW[0].v.Pt());
-		}
-		
-	}
-	if(abs(NW[2].pid == 14))
-	{
-// 		h.NuEta->Fill(NW[2].v.Eta());
-// 		h.NuPhi->Fill(NW[2].v.Phi());
-		h.NuMet->Fill(NW[2].v.Pt());
-		if (NW[0].v.Pt() >= NW[1].v.Pt())
-		{
-			h.Lep1Pt->Fill(NW[0].v.Pt());
-			h.Lep2Pt->Fill(NW[1].v.Pt());
-		}
-		else
-		{
-			h.Lep1Pt->Fill(NW[1].v.Pt());
-			h.Lep2Pt->Fill(NW[0].v.Pt());
-		}
-	}*/
-	h.Lep1Pt->Fill(NW[1].v.Pt());
-	h.Lep1Eta->Fill(NW[1].v.Eta());
-	h.Lep1Phi->Fill(NW[1].v.Phi());
+	h.L2Pt->Fill(NW[1].v.Pt());
+	h.L2Eta->Fill(NW[1].v.Eta());
+	h.L2Phi->Fill(NW[1].v.Phi());
 	
-	if(abs(NW[0].pid == 13))
+	if(abs(NW[0].pid) == 13)
 	{
-		h.Lep2Pt->Fill(NW[0].v.Pt());
-		h.Lep2Eta->Fill(NW[0].v.Eta());
-		h.Lep2Phi->Fill(NW[0].v.Phi());
+		h.L3Pt->Fill(NW[0].v.Pt());
+		h.L3Eta->Fill(NW[0].v.Eta());
+		h.L3Phi->Fill(NW[0].v.Phi());
 		h.NuMet->Fill(NW[2].v.Pt());
 		h.NuEta->Fill(NW[2].v.Eta());
 		h.NuPhi->Fill(NW[2].v.Phi());
 	}
 	else
 	{
-		h.Lep2Pt->Fill(NW[2].v.Pt());
-		h.Lep2Eta->Fill(NW[2].v.Eta());
-		h.Lep2Phi->Fill(NW[2].v.Phi());
+		h.L3Pt->Fill(NW[2].v.Pt());
+		h.L3Eta->Fill(NW[2].v.Eta());
+		h.L3Phi->Fill(NW[2].v.Phi());
 		h.NuMet->Fill(NW[0].v.Pt());
 		h.NuEta->Fill(NW[0].v.Eta());
 		h.NuPhi->Fill(NW[0].v.Phi());
-	}
-	
-	
-	
+	}	
    }
 }
 
 
 void DelAna::BookHistograms()
 {
-	h.NMass  = new TH1F("NR_Mass","NR Mass",20,0,40); h.NMass->Sumw2();
+	h.NMass  = new TH1F("NR_Mass","NR Mass",20,-5,50); h.NMass->Sumw2();
 	h.NMass->GetXaxis()->SetTitle("Mass [GeV]");
 	h.NMass->GetYaxis()->SetTitle("# of RHN ");
-	h.NMass->SetTitle("Mass_of_RHN ");
+	h.NMass->SetTitle("NR Mass");
 	
-	h.LeaLepPt  = new TH1F("Leading_Lepton_Pt","Leading Lepton P_{T}",100.0,0.0,200.0); h.LeaLepPt->Sumw2();
-	h.LeaLepPt->GetXaxis()->SetTitle("P_{T} [GeV]");
-	h.LeaLepPt->GetYaxis()->SetTitle("# of Events");
-	h.LeaLepPt->SetTitle("Leadind Lepton P_{T}");
+	h.WMass  = new TH1F("W_Mass","W Mass",100,0,120); h.WMass->Sumw2();
+	h.WMass->GetXaxis()->SetTitle("Mass [GeV]");
+	h.WMass->GetYaxis()->SetTitle("# of Events ");
+	h.WMass->SetTitle("W Mass");
 	
-	h.LeaLepEta  = new TH1F("Leading_Lepton_Eta","Leading Lepton Eta",100.0,-10.,10.); h.LeaLepEta->Sumw2();
-	h.LeaLepEta->GetXaxis()->SetTitle("Eta");
-	h.LeaLepEta->GetYaxis()->SetTitle("# of Events");
-	h.LeaLepEta->SetTitle("Leadind Lepton Eta");
+	h.L1Pt  = new TH1F("First_Lepton_Pt","First Lepton P_{T}",100.0,0.0,100); h.L1Pt->Sumw2();
+	h.L1Pt->GetXaxis()->SetTitle("P_{T} [GeV]");
+	h.L1Pt->GetYaxis()->SetTitle("# of Events");
+	h.L1Pt->SetTitle("First Lepton P_{T}");
 	
+	h.L1Eta  = new TH1F("First_Lepton_Eta","First Lepton Eta",100.0,-10.,10.0); h.L1Eta->Sumw2();
+	h.L1Eta->GetXaxis()->SetTitle("Eta");
+	h.L1Eta->GetYaxis()->SetTitle("# of Events");
+	h.L1Eta->SetTitle("First Lepton Eta");
 	
-	h.LeaLepPhi  = new TH1F("Leading_Lepton_Phi","Leading Lepton Phi",100.0,-5.0,5.0); h.LeaLepPhi->Sumw2();
-	h.LeaLepPhi->GetXaxis()->SetTitle("Phi");
-	h.LeaLepPhi->GetYaxis()->SetTitle("# of Events");
-	h.LeaLepPhi->SetTitle("Leadind Lepton Phi");
+	h.L1Phi  = new TH1F("First_Lepton_Phi","First Lepton Phi",100.0,-5.0,5.0); h.L1Phi->Sumw2();
+	h.L1Phi->GetXaxis()->SetTitle("Phi");
+	h.L1Phi->GetYaxis()->SetTitle("# of Events");
+	h.L1Phi->SetTitle("First Lepton Phi");
 	
-	h.Lep1Pt  = new TH1F("First_Lepton_Pt","First Lepton P_{T}",100.0,0.0,100); h.Lep1Pt->Sumw2();
-	h.Lep1Pt->GetXaxis()->SetTitle("P_{T} [GeV]");
-	h.Lep1Pt->GetYaxis()->SetTitle("# of Events");
-	h.Lep1Pt->SetTitle("1st Lepton P_{T}");
+	h.L2Pt  = new TH1F("Second_Lepton_Pt","Second Lepton P_{T}",100.0,0.0,100); h.L2Pt->Sumw2();
+	h.L2Pt->GetXaxis()->SetTitle("P_{T} [GeV]");
+	h.L2Pt->GetYaxis()->SetTitle("# of Events");
+	h.L2Pt->SetTitle("Second Lepton P_{T}");
 	
-	h.Lep1Eta  = new TH1F("First_Lepton_Eta","First Lepton Eta",100.0,-10.,10.0); h.Lep1Eta->Sumw2();
-	h.Lep1Eta->GetXaxis()->SetTitle("Eta");
-	h.Lep1Eta->GetYaxis()->SetTitle("# of Events");
-	h.Lep1Eta->SetTitle("1st Lepton Eta");
+	h.L2Eta  = new TH1F("Second_Lepton_Eta","Second Lepton Eta", 100.,-10.,10.); h.L2Eta->Sumw2();
+	h.L2Eta->GetXaxis()->SetTitle("Eta");
+	h.L2Eta->GetYaxis()->SetTitle("# of Events");
+	h.L2Eta->SetTitle("Second Lepton Eta");
 	
-	h.Lep1Phi  = new TH1F("First_Lepton_Phi","First Lepton Phi",100.0,-5.0,5.0); h.Lep1Phi->Sumw2();
-	h.Lep1Phi->GetXaxis()->SetTitle("Phi");
-	h.Lep1Phi->GetYaxis()->SetTitle("# of Events");
-	h.Lep1Phi->SetTitle("1st Lepton Phi");
+	h.L2Phi  = new TH1F("Second_Lepton_Phi","Second Lepton Phi", 100,-5.,5.); h.L2Phi->Sumw2();
+	h.L2Phi->GetXaxis()->SetTitle("Phi");
+	h.L2Phi->GetYaxis()->SetTitle("# of Events");
+	h.L2Phi->SetTitle("Second Lepton Phi");
 	
-	h.Lep2Pt  = new TH1F("Second_Lepton_Pt","Second Lepton P_{T}",100.0,0.0,100); h.Lep2Pt->Sumw2();
-	h.Lep2Pt->GetXaxis()->SetTitle("P_{T} [GeV]");
-	h.Lep2Pt->GetYaxis()->SetTitle("# of Events");
-	h.Lep2Pt->SetTitle("2nd Lepton P_{T}");
+	h.L3Pt  = new TH1F("Third_Lepton_Pt","Third Lepton P_{T}",100.0,0.0,200.0); h.L3Pt->Sumw2();
+	h.L3Pt->GetXaxis()->SetTitle("P_{T} [GeV]");
+	h.L3Pt->GetYaxis()->SetTitle("# of Events");
+	h.L3Pt->SetTitle("Third Lepton P_{T}");
 	
-	h.Lep2Eta  = new TH1F("Second_Lepton_Eta","Second Lepton Eta", 100.,-10.,10.); h.Lep2Eta->Sumw2();
-	h.Lep2Eta->GetXaxis()->SetTitle("Eta");
-	h.Lep2Eta->GetYaxis()->SetTitle("# of Events");
-	h.Lep2Eta->SetTitle("2nd Lepton Eta");
+	h.L3Eta  = new TH1F("Third_Lepton_Eta","Third Lepton Eta",100.0,-10.,10.); h.L3Eta->Sumw2();
+	h.L3Eta->GetXaxis()->SetTitle("Eta");
+	h.L3Eta->GetYaxis()->SetTitle("# of Events");
+	h.L3Eta->SetTitle("Third Lepton Eta");
 	
-	h.Lep2Phi  = new TH1F("Second_Lepton_Phi","Second Lepton Phi", 100,-5.,5.); h.Lep2Phi->Sumw2();
-	h.Lep2Phi->GetXaxis()->SetTitle("Phi");
-	h.Lep2Phi->GetYaxis()->SetTitle("# of Events");
-	h.Lep2Phi->SetTitle("2nd Lepton Phi");
+	h.L3Phi  = new TH1F("Third_Lepton_Phi","Third Lepton Phi",100.0,-5.0,5.0); h.L3Phi->Sumw2();
+	h.L3Phi->GetXaxis()->SetTitle("Phi");
+	h.L3Phi->GetYaxis()->SetTitle("# of Events");
+	h.L3Phi->SetTitle("Third Lepton Phi");
 	
 	h.NuMet  = new TH1F("Neutrino_Met","Neutrino Met", 100.0,0.,100.); h.NuMet->Sumw2();
 	h.NuMet->GetXaxis()->SetTitle("Met");
 	h.NuMet->GetYaxis()->SetTitle("# of Events");
-	h.NuMet->SetTitle("Neutrinos Met");
+	h.NuMet->SetTitle("Neutrino Met");
 	
 	h.NuEta  = new TH1F("Neutrino_Eta","Neutrino Eta", 100.0,-10.,10.); h.NuEta->Sumw2();
 	h.NuEta->GetXaxis()->SetTitle("Eta");
 	h.NuEta->GetYaxis()->SetTitle("# of Events");
-	h.NuEta->SetTitle("Neutrinos Eta");
+	h.NuEta->SetTitle("Neutrino Eta");
 	
-	h.NuPhi  = new TH1F("Neutrino_Phi","Neutrino Phi", 100.0,0.,100.); h.NuPhi->Sumw2();
+	h.NuPhi  = new TH1F("Neutrino_Phi","Neutrino Phi", 100.0,-5.,5.); h.NuPhi->Sumw2();
 	h.NuPhi->GetXaxis()->SetTitle("Phi");
 	h.NuPhi->GetYaxis()->SetTitle("# of Events");
-	h.NuPhi->SetTitle("Neutrinos Phi");
+	h.NuPhi->SetTitle("Neutrino Phi");
 	
 	h.Dxy  = new TH1F("Transverse_Impact_Parameter","Transverse Impact Parameter",100,-5.,5.); h.Dxy->Sumw2();
 	h.Dxy->GetXaxis()->SetTitle("Distance (mm)");

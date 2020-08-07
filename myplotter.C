@@ -36,92 +36,249 @@ void myplotter()
 	TFile* file20 = TFile::Open("hst_RHN_13TeV_20GeV.root");
 	TFile* file30 = TFile::Open("hst_RHN_13TeV_30GeV.root");
 	
+	
 // 	//////////////////////////////////////////////////////////////
 // 	First_Lepton Variables
 // 	/////////////////////////////////////////////////
-	TH1 *Lep1_2Pt = (TH1*)file2->Get("First_Lepton_Pt");
-	TH1 *Lep1_5Pt = (TH1*)file5->Get("First_Lepton_Pt");
-	TH1 *Lep1_10Pt = (TH1*)file10->Get("First_Lepton_Pt");
-	TH1 *Lep1_15Pt = (TH1*)file15->Get("First_Lepton_Pt");
-	TH1 *Lep1_20Pt = (TH1*)file20->Get("First_Lepton_Pt");
-	TH1 *Lep1_30Pt = (TH1*)file30->Get("First_Lepton_Pt");
+// 	--------------------Pt------------------------------------------------------
+	TH1 *L1_2Pt = (TH1*)file2->Get("First_Lepton_Pt");
+	TH1 *L1_5Pt = (TH1*)file5->Get("First_Lepton_Pt");
+	TH1 *L1_10Pt = (TH1*)file10->Get("First_Lepton_Pt");
+	TH1 *L1_15Pt = (TH1*)file15->Get("First_Lepton_Pt");
+	TH1 *L1_20Pt = (TH1*)file20->Get("First_Lepton_Pt");
+	TH1 *L1_30Pt = (TH1*)file30->Get("First_Lepton_Pt");
 	
-	Lep1_2Pt -> SetLineColor(1);
-	Lep1_5Pt -> SetLineColor(2);
-	Lep1_10Pt -> SetLineColor(3);
-	Lep1_15Pt -> SetLineColor(4);
-	Lep1_20Pt -> SetLineColor(5);
-	Lep1_30Pt -> SetLineColor(6);
+	L1_2Pt -> SetLineColor(1);
+	L1_5Pt -> SetLineColor(2);
+	L1_10Pt -> SetLineColor(3);
+	L1_15Pt -> SetLineColor(4);
+	L1_20Pt -> SetLineColor(5);
+	L1_30Pt -> SetLineColor(6);
 	
 	
-	TCanvas * canLep1Pt = new TCanvas("canLep1Pt");	
-	canLep1Pt->cd();
-	Lep1_2Pt->SetTitle("First_Lepton_Pt");
-	Lep1_2Pt -> SetStats(kFALSE);
-	Lep1_2Pt -> Draw("hist");
-	Lep1_5Pt -> Draw("same,hist");
-	Lep1_10Pt -> Draw("Same,hist");
-	Lep1_15Pt -> Draw("Same,hist");
-	Lep1_20Pt -> Draw("Same,hist");
-	Lep1_30Pt -> Draw("Same,hist");
+	TCanvas * canL1Pt = new TCanvas("canLep1Pt");	
+	canL1Pt->cd();
+	L1_2Pt->SetTitle("First_Lepton_Pt");
+	L1_2Pt -> SetStats(kFALSE);
+	L1_2Pt -> Draw("hist");
+	L1_5Pt -> Draw("same,hist");
+	L1_10Pt -> Draw("Same,hist");
+	L1_15Pt -> Draw("Same,hist");
+	L1_20Pt -> Draw("Same,hist");
+	L1_30Pt -> Draw("Same,hist");
 	
-	TLegend *leglep1pt = new TLegend(0.85, 0.75, .75, .89);
-	leglep1pt->SetBorderSize(0);
+	TLegend *legL1Pt = new TLegend(.8, .7, 0.9, .898);
+	legL1Pt->SetBorderSize(0);
 // 	leg->SetLineColor(1);
 // 	gStyle->SetFillColor(0);
 // 	gStyle->SetCanvasColor(10);
-	leglep1pt->AddEntry(Lep1_2Pt, "2 GeV", "L");
-	leglep1pt->AddEntry(Lep1_5Pt, "5 GeV", "L");
-	leglep1pt->AddEntry(Lep1_10Pt, "10 GeV", "L");
-	leglep1pt->AddEntry(Lep1_15Pt, "10 GeV", "L");
-	leglep1pt->AddEntry(Lep1_20Pt, "10 GeV", "L");
-	leglep1pt->AddEntry(Lep1_30Pt, "10 GeV", "L");
-	leglep1pt->Draw();
-	canLep1Pt->SaveAs("First_Lepton_Pt.png");
+	legL1Pt->AddEntry(L1_2Pt, "2 GeV", "L");
+	legL1Pt->AddEntry(L1_5Pt, "5 GeV", "L");
+	legL1Pt->AddEntry(L1_10Pt, "10 GeV", "L");
+	legL1Pt->AddEntry(L1_15Pt, "15 GeV", "L");
+	legL1Pt->AddEntry(L1_20Pt, "20 GeV", "L");
+	legL1Pt->AddEntry(L1_30Pt, "30 GeV", "L");
+	legL1Pt->Draw();
+	canL1Pt->SaveAs("First_Lepton_Pt.png");
+// 	--------------------------------------------------------------------------------------
 	
+// 	----------------------------------Eta-----------------------------------------------------
+	TH1 *L1_2Eta = (TH1*)file2->Get("First_Lepton_Eta");
+	TH1 *L1_5Eta = (TH1*)file5->Get("First_Lepton_Eta");
+	TH1 *L1_10Eta = (TH1*)file10->Get("First_Lepton_Eta");
+	TH1 *L1_15Eta = (TH1*)file15->Get("First_Lepton_Eta");
+	TH1 *L1_20Eta = (TH1*)file20->Get("First_Lepton_Eta");
+	TH1 *L1_30Eta = (TH1*)file30->Get("First_Lepton_Eta");
+	
+	L1_2Eta -> SetLineColor(1);
+	L1_5Eta -> SetLineColor(2);
+	L1_10Eta -> SetLineColor(3);
+	L1_15Eta -> SetLineColor(4);
+	L1_20Eta -> SetLineColor(5);
+	L1_30Eta -> SetLineColor(6);
+	
+	
+	TCanvas * canL1Eta = new TCanvas("canLep1Eta");	
+	canL1Eta->cd();
+	L1_2Eta->SetTitle("First_Lepton_Eta");
+	L1_2Eta -> SetStats(kFALSE);
+	L1_2Eta -> Draw("hist");
+	L1_5Eta -> Draw("same,hist");
+	L1_10Eta -> Draw("Same,hist");
+	L1_15Eta -> Draw("Same,hist");
+	L1_20Eta -> Draw("Same,hist");
+	L1_30Eta -> Draw("Same,hist");
+	
+	TLegend *legL1Eta = new TLegend(.8, .7, 0.9, .898);
+	legL1Eta->SetBorderSize(0);
+	legL1Eta->AddEntry(L1_2Eta, "2 GeV", "L");
+	legL1Eta->AddEntry(L1_5Eta, "5 GeV", "L");
+	legL1Eta->AddEntry(L1_10Eta, "10 GeV", "L");
+	legL1Eta->AddEntry(L1_15Eta, "15 GeV", "L");
+	legL1Eta->AddEntry(L1_20Eta, "20 GeV", "L");
+	legL1Eta->AddEntry(L1_30Eta, "30 GeV", "L");
+	legL1Eta->Draw();
+	canL1Eta->SaveAs("First_Lepton_Eta.png");
+// 	---------------------------------------------------------------------------------------	
+
+// 	-------------------------------------Phi--------------------------------------------------
+	TH1 *L1_2Phi = (TH1*)file2->Get("First_Lepton_Phi");
+	TH1 *L1_5Phi = (TH1*)file5->Get("First_Lepton_Phi");
+	TH1 *L1_10Phi = (TH1*)file10->Get("First_Lepton_Phi");
+	TH1 *L1_15Phi = (TH1*)file15->Get("First_Lepton_Phi");
+	TH1 *L1_20Phi = (TH1*)file20->Get("First_Lepton_Phi");
+	TH1 *L1_30Phi = (TH1*)file30->Get("First_Lepton_Phi");
+	
+	L1_2Phi -> SetLineColor(1);
+	L1_5Phi -> SetLineColor(2);
+	L1_10Phi -> SetLineColor(3);
+	L1_15Phi -> SetLineColor(4);
+	L1_20Phi -> SetLineColor(5);
+	L1_30Phi -> SetLineColor(6);
+	
+	
+	TCanvas * canL1Phi = new TCanvas("canLep1Phi");	
+	canL1Phi->cd();
+	L1_2Phi->SetTitle("First_Lepton_Phi");
+	L1_2Phi -> SetStats(kFALSE);
+	L1_2Phi -> Draw("hist");
+	L1_5Phi -> Draw("same,hist");
+	L1_10Phi -> Draw("Same,hist");
+	L1_15Phi -> Draw("Same,hist");
+	L1_20Phi -> Draw("Same,hist");
+	L1_30Phi -> Draw("Same,hist");
+	
+	TLegend *legL1Phi = new TLegend(.8, .7, 0.9, .898);
+	legL1Phi->SetBorderSize(0);
+	legL1Phi->AddEntry(L1_2Phi, "2 GeV", "L");
+	legL1Phi->AddEntry(L1_5Phi, "5 GeV", "L");
+	legL1Phi->AddEntry(L1_10Phi, "10 GeV", "L");
+	legL1Phi->AddEntry(L1_15Phi, "15 GeV", "L");
+	legL1Phi->AddEntry(L1_20Phi, "20 GeV", "L");
+	legL1Phi->AddEntry(L1_30Phi, "30 GeV", "L");
+	legL1Phi->Draw();
+	canL1Phi->SaveAs("First_Lepton_Phi.png");
+// 	---------------------------------------------------------------------------------------
 	
 	
 // 	//////////////////////////////////////////////
 // 	Second lepton variables
 // 	/////////////////////////////////////////////
-	TH1 *Lep2_2Pt = (TH1*)file2->Get("Second_Lepton_Pt");//repeat for every mass point
-	TH1 *Lep2_5Pt = (TH1*)file5->Get("Second_Lepton_Pt");
-	TH1 *Lep2_10Pt = (TH1*)file10->Get("Second_Lepton_Pt");
-	TH1 *Lep2_15Pt = (TH1*)file15->Get("Second_Lepton_Pt");
-	TH1 *Lep2_20Pt = (TH1*)file20->Get("Second_Lepton_Pt");
-	TH1 *Lep2_30Pt = (TH1*)file30->Get("Second_Lepton_Pt");
+// 	----------------------------Pt----------------------------------------------------
+	TH1 *L2_2Pt = (TH1*)file2->Get("Second_Lepton_Pt");//repeat for every mass point
+	TH1 *L2_5Pt = (TH1*)file5->Get("Second_Lepton_Pt");
+	TH1 *L2_10Pt = (TH1*)file10->Get("Second_Lepton_Pt");
+	TH1 *L2_15Pt = (TH1*)file15->Get("Second_Lepton_Pt");
+	TH1 *L2_20Pt = (TH1*)file20->Get("Second_Lepton_Pt");
+	TH1 *L2_30Pt = (TH1*)file30->Get("Second_Lepton_Pt");
 	
-	Lep2_2Pt -> SetLineColor(1);//repeat for every mass point
-	Lep2_5Pt -> SetLineColor(2);
-	Lep2_10Pt -> SetLineColor(3);
-	Lep2_15Pt -> SetLineColor(4);
-	Lep2_20Pt -> SetLineColor(5);
-	Lep2_30Pt -> SetLineColor(6);
+	L2_2Pt -> SetLineColor(1);//repeat for every mass point
+	L2_5Pt -> SetLineColor(2);
+	L2_10Pt -> SetLineColor(3);
+	L2_15Pt -> SetLineColor(4);
+	L2_20Pt -> SetLineColor(5);
+	L2_30Pt -> SetLineColor(6);
 	
-	TCanvas * canLep2Pt = new TCanvas("canLep2Pt");
-	canLep2Pt->cd();
-	Lep2_2Pt->SetTitle("Second_Lepton_Pt");
-	Lep2_2Pt->SetStats(kFALSE);
-	Lep2_2Pt -> Draw("hist");//repeat for each mass point
-	Lep2_5Pt -> Draw("same,hist");
-	Lep2_10Pt -> Draw("same,hist");
-	Lep2_15Pt -> Draw("same,hist");
-	Lep2_20Pt -> Draw("same,hist");
-	Lep2_30Pt -> Draw("same,hist");
+	TCanvas * canL2Pt = new TCanvas("canLep2Pt");
+	canL2Pt->cd();
+	L2_2Pt->SetTitle("Second_Lepton_Pt");
+	L2_2Pt->SetStats(kFALSE);
+	L2_2Pt -> Draw("hist");//repeat for each mass point
+	L2_5Pt -> Draw("same,hist");
+	L2_10Pt -> Draw("same,hist");
+	L2_15Pt -> Draw("same,hist");
+	L2_20Pt -> Draw("same,hist");
+	L2_30Pt -> Draw("same,hist");
 	
-	TLegend* leglep2Pt = new TLegend(0.85, 0.75, .75, .89);
-	leglep2Pt->SetBorderSize(0);
-	leglep2Pt->AddEntry(Lep2_2Pt, "2 GeV", "L");//repeat for every mass point
-	leglep2Pt->AddEntry(Lep2_5Pt, "5 GeV", "L");
-	leglep2Pt->AddEntry(Lep2_10Pt, "10 GeV", "L");
-	leglep2Pt->AddEntry(Lep2_15Pt, "15 GeV", "L");
-	leglep2Pt->AddEntry(Lep2_20Pt, "20 GeV", "L");
-	leglep2Pt->AddEntry(Lep2_30Pt, "30 GeV", "L");
-	leglep2Pt->Draw();
-	canLep2Pt->SaveAs("Second_Lepton_Pt.png");
+	TLegend* legL2Pt = new TLegend(.8, .7, 0.9, .898);
+	legL2Pt->SetBorderSize(0);
+	legL2Pt->AddEntry(L2_2Pt, "2 GeV", "L");//repeat for every mass point
+	legL2Pt->AddEntry(L2_5Pt, "5 GeV", "L");
+	legL2Pt->AddEntry(L2_10Pt, "10 GeV", "L");
+	legL2Pt->AddEntry(L2_15Pt, "15 GeV", "L");
+	legL2Pt->AddEntry(L2_20Pt, "20 GeV", "L");
+	legL2Pt->AddEntry(L2_30Pt, "30 GeV", "L");
+	legL2Pt->Draw();
+	canL2Pt->SaveAs("Second_Lepton_Pt.png");
+// 	----------------------------------------------------------------------
 	
-
-
+// 	----------------------------Eta--------------------------------------
+	TH1 *L2_2Eta = (TH1*)file2->Get("Second_Lepton_Eta");//repeat for every mass point
+	TH1 *L2_5Eta = (TH1*)file5->Get("Second_Lepton_Eta");
+	TH1 *L2_10Eta = (TH1*)file10->Get("Second_Lepton_Eta");
+	TH1 *L2_15Eta = (TH1*)file15->Get("Second_Lepton_Eta");
+	TH1 *L2_20Eta = (TH1*)file20->Get("Second_Lepton_Eta");
+	TH1 *L2_30Eta = (TH1*)file30->Get("Second_Lepton_Eta");
+	
+	L2_2Eta -> SetLineColor(1);//repeat for every mass point
+	L2_5Eta -> SetLineColor(2);
+	L2_10Eta -> SetLineColor(3);
+	L2_15Eta -> SetLineColor(4);
+	L2_20Eta -> SetLineColor(5);
+	L2_30Eta -> SetLineColor(6);
+	
+	TCanvas * canL2Eta = new TCanvas("canLep2Eta");
+	canL2Eta->cd();
+	L2_2Eta->SetTitle("Second_Lepton_Eta");
+	L2_2Eta->SetStats(kFALSE);
+	L2_2Eta -> Draw("hist");//repeat for each mass point
+	L2_5Eta -> Draw("same,hist");
+	L2_10Eta -> Draw("same,hist");
+	L2_15Eta -> Draw("same,hist");
+	L2_20Eta -> Draw("same,hist");
+	L2_30Eta -> Draw("same,hist");
+	
+	TLegend* legL2Eta = new TLegend(.8, .7, 0.9, .898);
+	legL2Eta->SetBorderSize(0);
+	legL2Eta->AddEntry(L2_2Eta, "2 GeV", "L");//repeat for every mass point
+	legL2Eta->AddEntry(L2_5Eta, "5 GeV", "L");
+	legL2Eta->AddEntry(L2_10Eta, "10 GeV", "L");
+	legL2Eta->AddEntry(L2_15Eta, "15 GeV", "L");
+	legL2Eta->AddEntry(L2_20Eta, "20 GeV", "L");
+	legL2Eta->AddEntry(L2_30Eta, "30 GeV", "L");
+	legL2Eta->Draw();
+	canL2Eta->SaveAs("Second_Lepton_Eta.png");
+// 	---------------------------------------------------------------------
+	
+// 	-------------------------------Phi------------------------------------
+	TH1 *L2_2Phi = (TH1*)file2->Get("Second_Lepton_Phi");//repeat for every mass point
+	TH1 *L2_5Phi = (TH1*)file5->Get("Second_Lepton_Phi");
+	TH1 *L2_10Phi = (TH1*)file10->Get("Second_Lepton_Phi");
+	TH1 *L2_15Phi = (TH1*)file15->Get("Second_Lepton_Phi");
+	TH1 *L2_20Phi = (TH1*)file20->Get("Second_Lepton_Phi");
+	TH1 *L2_30Phi = (TH1*)file30->Get("Second_Lepton_Phi");
+	
+	L2_2Phi -> SetLineColor(1);//repeat for every mass point
+	L2_5Phi -> SetLineColor(2);
+	L2_10Phi -> SetLineColor(3);
+	L2_15Phi -> SetLineColor(4);
+	L2_20Phi -> SetLineColor(5);
+	L2_30Phi -> SetLineColor(6);
+	
+	TCanvas * canL2Phi = new TCanvas("canLep2Phi");
+	canL2Phi->cd();
+	L2_2Phi->SetTitle("Second_Lepton_Phi");
+	L2_2Phi->SetStats(kFALSE);
+	L2_2Phi -> Draw("hist");//repeat for each mass point
+	L2_5Phi -> Draw("same,hist");
+	L2_10Phi -> Draw("same,hist");
+	L2_15Phi -> Draw("same,hist");
+	L2_20Phi -> Draw("same,hist");
+	L2_30Phi -> Draw("same,hist");
+	
+	TLegend* legL2Phi = new TLegend(.8, .7, 0.9, .898);
+	legL2Phi->SetBorderSize(0);
+	legL2Phi->AddEntry(L2_2Phi, "2 GeV", "L");//repeat for every mass point
+	legL2Phi->AddEntry(L2_5Phi, "5 GeV", "L");
+	legL2Phi->AddEntry(L2_10Phi, "10 GeV", "L");
+	legL2Phi->AddEntry(L2_15Phi, "15 GeV", "L");
+	legL2Phi->AddEntry(L2_20Phi, "20 GeV", "L");
+	legL2Phi->AddEntry(L2_30Phi, "30 GeV", "L");
+	legL2Phi->Draw();
+	canL2Phi->SaveAs("Second_Lepton_Phi.png");
+// 	----------------------------------------------------------------------
+	
+	
 // 	//////////////////////////////////////////////////////////////
 // 	Transverse_Impact_Parameter
 // 	/////////////////////////////////////////////////////////////
@@ -143,6 +300,7 @@ void myplotter()
 	TrImPa->cd();
 	TrImPa2->SetTitle("Transverse Impact Parameter");
 	TrImPa2->SetStats(kFALSE);
+	TrImPa2->SetAxisRange(-1.1,1.1);
 	TrImPa2 -> Draw("hist");
 	TrImPa5 -> Draw("same,hist");
 	TrImPa10 -> Draw("same,hist");
@@ -150,11 +308,8 @@ void myplotter()
 	TrImPa20 -> Draw("same,hist");
 	TrImPa30 -> Draw("same,hist");
 	
-	TLegend* leg1 = new TLegend(0.85, 0.75, .75, .89);
+	TLegend* leg1 = new TLegend(.8, .7, 0.9, .898);
 	leg1->SetBorderSize(0);
-// 	leg1->SetLineColor(0);
-// 	gStyle->SetFillColor(0);
-// 	gStyle->SetCanvasColor(10);
 	leg1->AddEntry(TrImPa2, "2 GeV", "L");
 	leg1->AddEntry(TrImPa5, "5 GeV", "L");
 	leg1->AddEntry(TrImPa10, "10 GeV", "L");
@@ -186,6 +341,7 @@ void myplotter()
 	canLoImPa->cd();
 	LoImPa2->SetTitle("Long Impact Parameter");
 	LoImPa2->SetStats(kFALSE);
+	LoImPa2->SetAxisRange(-1.1,1.1);
 	LoImPa2 -> Draw("hist");//repeat for each mass point
 	LoImPa5 -> Draw("same,hist");
 	LoImPa10 -> Draw("same,hist");
@@ -194,7 +350,7 @@ void myplotter()
 	LoImPa30 -> Draw("same,hist");
 	
 	
-	TLegend* legLip = new TLegend(0.85, 0.75, .75, .89);
+	TLegend* legLip = new TLegend(.8, .7, 0.9, .898);
 	legLip->SetBorderSize(0);
 	legLip->AddEntry(LoImPa2, "2 GeV", "L");//repeat for every mass point
 	legLip->AddEntry(LoImPa5, "5 GeV", "L");
@@ -211,6 +367,7 @@ void myplotter()
 // 	//////////////////////////////////////////////
 // 	Neutrino Variables
 // 	/////////////////////////////////////////////
+// 	-----------------------------Met--------------------------------------
 	TH1 *Nu_2Pt = (TH1*)file2->Get("Neutrino_Met");//repeat for every mass point
 	TH1 *Nu_5Pt = (TH1*)file5->Get("Neutrino_Met");
 	TH1 *Nu_10Pt = (TH1*)file10->Get("Neutrino_Met");
@@ -228,6 +385,7 @@ void myplotter()
 	TCanvas * canNuPt = new TCanvas("canNuPt");
 	canNuPt->cd();
 	Nu_2Pt->SetTitle("Neutrino_Met");
+	Nu_2Pt->SetAxisRange(-1.5,100.);
 	Nu_2Pt->SetStats(kFALSE);
 	Nu_2Pt -> Draw("hist");//repeat for each mass point
 	Nu_5Pt -> Draw("same,hist");
@@ -236,7 +394,7 @@ void myplotter()
 	Nu_20Pt -> Draw("same,hist");
 	Nu_30Pt -> Draw("same,hist");
 	
-	TLegend* legNuPt = new TLegend(0.85, 0.75, .75, .89);
+	TLegend* legNuPt = new TLegend(.8, .7, 0.9, .898);
 	legNuPt->SetBorderSize(0);
 	legNuPt->AddEntry(Nu_2Pt, "2 GeV", "L");//repeat for every mass point
 	legNuPt->AddEntry(Nu_5Pt, "5 GeV", "L");
@@ -246,12 +404,90 @@ void myplotter()
 	legNuPt->AddEntry(Nu_30Pt, "30 GeV", "L");
 	legNuPt->Draw();
 	canNuPt->SaveAs("Neutrino_Met.png");
+// 	----------------------------------
 	
+// 	-----------------------Eta----------------------------------------
+	TH1 *Nu_2Eta = (TH1*)file2->Get("Neutrino_Eta");//repeat for every mass point
+	TH1 *Nu_5Eta = (TH1*)file5->Get("Neutrino_Eta");
+	TH1 *Nu_10Eta = (TH1*)file10->Get("Neutrino_Eta");
+	TH1 *Nu_15Eta = (TH1*)file15->Get("Neutrino_Eta");
+	TH1 *Nu_20Eta = (TH1*)file20->Get("Neutrino_Eta");
+	TH1 *Nu_30Eta = (TH1*)file30->Get("Neutrino_Eta");
+	
+	Nu_2Eta -> SetLineColor(1);//repeat for every mass point
+	Nu_5Eta -> SetLineColor(2);
+	Nu_10Eta -> SetLineColor(3);
+	Nu_15Eta -> SetLineColor(4);
+	Nu_20Eta -> SetLineColor(5);
+	Nu_30Eta -> SetLineColor(6);
+	
+	TCanvas * canNuEta = new TCanvas("canNuEta");
+	canNuEta->cd();
+	Nu_2Eta->SetTitle("Neutrino_Eta");
+	Nu_2Eta->SetStats(kFALSE);
+	Nu_2Eta -> Draw("hist");//repeat for each mass point
+	Nu_5Eta -> Draw("same,hist");
+	Nu_10Eta -> Draw("same,hist");
+	Nu_15Eta -> Draw("same,hist");
+	Nu_20Eta -> Draw("same,hist");
+	Nu_30Eta -> Draw("same,hist");
+	
+	TLegend* legNuEta = new TLegend(.8, .7, 0.9, .898);
+	legNuEta->SetBorderSize(0);
+	legNuEta->AddEntry(Nu_2Eta, "2 GeV", "L");//repeat for every mass point
+	legNuEta->AddEntry(Nu_5Eta, "5 GeV", "L");
+	legNuEta->AddEntry(Nu_10Eta, "10 GeV", "L");
+	legNuEta->AddEntry(Nu_15Eta, "15 GeV", "L");
+	legNuEta->AddEntry(Nu_20Eta, "20 GeV", "L");
+	legNuEta->AddEntry(Nu_30Eta, "30 GeV", "L");
+	legNuEta->Draw();
+	canNuEta->SaveAs("Neutrino_Eta.png");
+// 	------------------------------------------------------------------------------
+	
+// 	--------------------------------Phi----------------------------------------
+	TH1 *Nu_2Phi = (TH1*)file2->Get("Neutrino_Phi");//repeat for every mass point
+	TH1 *Nu_5Phi = (TH1*)file5->Get("Neutrino_Phi");
+	TH1 *Nu_10Phi = (TH1*)file10->Get("Neutrino_Phi");
+	TH1 *Nu_15Phi = (TH1*)file15->Get("Neutrino_Phi");
+	TH1 *Nu_20Phi = (TH1*)file20->Get("Neutrino_Phi");
+	TH1 *Nu_30Phi = (TH1*)file30->Get("Neutrino_Phi");
+	
+	Nu_2Phi -> SetLineColor(1);//repeat for every mass point
+	Nu_5Phi -> SetLineColor(2);
+	Nu_10Phi -> SetLineColor(3);
+	Nu_15Phi -> SetLineColor(4);
+	Nu_20Phi -> SetLineColor(5);
+	Nu_30Phi -> SetLineColor(6);
+	
+	TCanvas * canNuPhi = new TCanvas("canNuPhi");
+	canNuPhi->cd();
+	Nu_2Phi->SetTitle("Neutrino_Phi");
+	Nu_2Phi->SetStats(kFALSE);
+	Nu_2Phi->SetAxisRange(-5.0,5);
+	Nu_2Phi -> Draw("hist");//repeat for each mass point
+	Nu_5Phi -> Draw("same,hist");
+	Nu_10Phi -> Draw("same,hist");
+	Nu_15Phi -> Draw("same,hist");
+	Nu_20Phi -> Draw("same,hist");
+	Nu_30Phi -> Draw("same,hist");
+	
+	TLegend* legNuPhi = new TLegend(.8, .7, 0.9, .898);//Tlegend(X_starts, Y_start, 
+	legNuPhi->SetBorderSize(0);
+	legNuPhi->AddEntry(Nu_2Phi, "2 GeV", "L");//repeat for every mass point
+	legNuPhi->AddEntry(Nu_5Phi, "5 GeV", "L");
+	legNuPhi->AddEntry(Nu_10Phi, "10 GeV", "L");
+	legNuPhi->AddEntry(Nu_15Phi, "15 GeV", "L");
+	legNuPhi->AddEntry(Nu_20Phi, "20 GeV", "L");
+	legNuPhi->AddEntry(Nu_30Phi, "30 GeV", "L");
+	legNuPhi->Draw();
+	canNuPhi->SaveAs("Neutrino_Phi.png");
+// 	---------------------------------------------------------------------------
 	
 	
 // 	//////////////////////////////////////////////
 // 	Heavy Neutrino Variables
 // 	/////////////////////////////////////////////
+// ------------------------------------------------------
 	TH1 *NRM_2Pt = (TH1*)file2->Get("NR_Mass");//repeat for every mass point
 	TH1 *NRM_5Pt = (TH1*)file5->Get("NR_Mass");
 	TH1 *NRM_10Pt = (TH1*)file10->Get("NR_Mass");
@@ -269,6 +505,7 @@ void myplotter()
 	TCanvas * canNRM = new TCanvas("canNRM");
 	canNRM->cd();
 	NRM_2Pt->SetTitle("Heavy Neutrino Mass");
+// 	NRM_2Pt->SetRangeUser(-10,60);
 	NRM_2Pt->SetStats(kFALSE);
 	NRM_2Pt -> Draw("hist");//repeat for each mass point
 	NRM_5Pt -> Draw("same,hist");
@@ -277,7 +514,7 @@ void myplotter()
 	NRM_20Pt -> Draw("same,hist");
 	NRM_30Pt -> Draw("same,hist");
 	
-	TLegend* legNRM = new TLegend(0.85, 0.75, .75, .89);
+	TLegend* legNRM = new TLegend(.8, .7, 0.9, .898);
 	legNRM->SetBorderSize(0);
 	legNRM->AddEntry(NRM_2Pt, "2 GeV", "L");//repeat for every mass point
 	legNRM->AddEntry(NRM_5Pt, "5 GeV", "L");
@@ -289,12 +526,54 @@ void myplotter()
 	canNRM->SaveAs("Heavy_Neutrino_Mass.png");
 	
 	
+	// 	//////////////////////////////////////////////
+// 	W Mass Variables
+// 	/////////////////////////////////////////////
+// ------------------------------------------------------
+	TH1 *WM_2Pt = (TH1*)file2->Get("W_Mass");//repeat for every mass point
+	TH1 *WM_5Pt = (TH1*)file5->Get("W_Mass");
+	TH1 *WM_10Pt = (TH1*)file10->Get("W_Mass");
+	TH1 *WM_15Pt = (TH1*)file15->Get("W_Mass");
+	TH1 *WM_20Pt = (TH1*)file20->Get("W_Mass");
+	TH1 *WM_30Pt = (TH1*)file30->Get("W_Mass");
+	
+	WM_2Pt -> SetLineColor(1);//repeat for every mass point
+	WM_5Pt -> SetLineColor(2);
+	WM_10Pt -> SetLineColor(3);
+	WM_15Pt -> SetLineColor(4);
+	WM_20Pt -> SetLineColor(5);
+	WM_30Pt -> SetLineColor(6);
+	
+	TCanvas * canWM = new TCanvas("canWM");
+	canWM->cd();
+	WM_2Pt->SetTitle("W Mass");
+// 	WM_2Pt->SetRangeUser(-10,60);
+	WM_2Pt->SetStats(kFALSE);
+	WM_2Pt -> Draw("hist");//repeat for each mass point
+	WM_5Pt -> Draw("same,hist");
+	WM_10Pt -> Draw("same,hist");
+	WM_15Pt -> Draw("same,hist");
+	WM_20Pt -> Draw("same,hist");
+	WM_30Pt -> Draw("same,hist");
+	
+	TLegend* legWM = new TLegend(.8, .7, 0.9, .898);
+	legWM->SetBorderSize(0);
+	legWM->AddEntry(WM_2Pt, "2 GeV", "L");//repeat for every mass point
+	legWM->AddEntry(WM_5Pt, "5 GeV", "L");
+	legWM->AddEntry(WM_10Pt, "10 GeV", "L");
+	legWM->AddEntry(WM_15Pt, "15 GeV", "L");
+	legWM->AddEntry(WM_20Pt, "20 GeV", "L");
+	legWM->AddEntry(WM_30Pt, "30 GeV", "L");
+	legWM->Draw();
+	canWM->SaveAs("W_Mass.png");
+	
+	
 ///////////////////////////////////////////////////////////////////////////////////////////////
 //new method
 ///////////////////////////////////////////////////////////////////////////////////////////////
 	
 	
-	/*TLegend* leglep1Pt = new TLegend(0.5, 0.5, 0.9, 0.9);
+	/*TLegend* leglep1Pt = new TLegend(.8, .7, 0.898, .898);
 	leglep1Pt->SetBorderSize(0);
 	leglep1Pt->SetLineColor(0);
 	for (int i=1;i<7;i++)
