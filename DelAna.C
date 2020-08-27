@@ -140,8 +140,9 @@ void DelAna::Loop()
 		h.L1Eta->Fill(NW[0].v.Eta());
 		h.L1Phi->Fill(NW[0].v.Phi());
 	}
-	h.Dxy->Fill(NW[0].Dxy);
-	h.Dz->Fill(NW[0].Dz);
+	h.Dxy->Fill(NW[0].Dxy/100);
+	h.Dz->Fill(NW[0].Dz/100);
+	
 	
 	h.L2Pt->Fill(NW[1].v.Pt());
 	h.L2Eta->Fill(NW[1].v.Eta());
@@ -241,12 +242,12 @@ void DelAna::BookHistograms()
 	h.NuPhi->GetYaxis()->SetTitle("# of Events");
 	h.NuPhi->SetTitle("Neutrino Phi");
 	
-	h.Dxy  = new TH1F("Transverse_Impact_Parameter","Transverse Impact Parameter",100,-5.,5.); h.Dxy->Sumw2();
+	h.Dxy  = new TH1F("Transverse_Impact_Parameter","Transverse Impact Parameter",100,-5,5); h.Dxy->Sumw2();
 	h.Dxy->GetXaxis()->SetTitle("Distance (mm)");
 	h.Dxy->GetYaxis()->SetTitle("# of Events");
 	h.Dxy->SetTitle("Dxy");
 	
-	h.Dz  = new TH1F("Long_Impact_Parameter","Long Impact Parameter",100,-5.,5.); h.Dz->Sumw2();
+	h.Dz  = new TH1F("Long_Impact_Parameter","Long Impact Parameter",100.,-5.,5.); h.Dz->Sumw2();
 	h.Dz->GetXaxis()->SetTitle("Distance (mm)");
 	h.Dz->GetYaxis()->SetTitle("# of Events");
 	h.Dz->SetTitle("Dz");

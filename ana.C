@@ -12,10 +12,11 @@ void ana(int sample_id=0)
   
   if(sample_id==0){
     //chain->Add("RHN_Mu_13TeV_10k.root");
-    chain->Add("RHN_Mu_13TeV_15GeV.root");
+//     chain->Add("val.root");
+	  chain->Add("RHN_13TeV_2GeV_5tom6Mix.root");
 
-    t->SetHstFileName("hst_RHN_13TeV_15GeV.root");
-    t->SetSumFileName("sum_RHN_13TeV_15GeV.txt");
+    t->SetHstFileName("hst_RHN_13TeV_2GeV_5tom6Mix.root");
+    t->SetSumFileName("sum_RHN_13TeV_2GeV_5tom6Mix.txt");
   }
 
   t->Begin();

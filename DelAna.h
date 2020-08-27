@@ -930,9 +930,9 @@ DelAna::DelAna(TTree *tree) : fChain(0)
 // if parameter tree is not specified (or zero), connect the file
 // used to generate this class and read the Tree.
    if (tree == 0) {
-      TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject("../RHN_Mu_13TeV_15GeV.root");
+      TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject("../RHN_13TeV_2GeV_5tom6Mix.root");
       if (!f || !f->IsOpen()) {
-         f = new TFile("../RHN_Mu_13TeV_15GeV.root");
+         f = new TFile("../RHN_13TeV_2GeV_5tom6Mix.root");
       }
       f->GetObject("Delphes",tree);
 
